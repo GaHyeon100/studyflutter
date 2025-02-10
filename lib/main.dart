@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:bamtol_market_app/src/app.dart';
 
 void main() {
   runApp(const MyApp());
@@ -9,9 +11,19 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        home: Scaffold(
-      body: Center(child: Image.asset('assets/images/logo_simbol.png')),
-    ));
+    return GetMaterialApp(
+      title: '당근마켓 클론 코딩',
+      initialRoute: '/',
+      theme: ThemeData(
+          appBarTheme: const AppBarTheme(
+            elevation: 0,
+            color: Color(0xff212123),
+            titleTextStyle: TextStyle(
+              color: Colors.white,
+            ),
+          ),
+          scaffoldBackgroundColor: const Color(0xff212123)),
+      getPages: [GetPage(name: '/', page: () => const App())],
+    );
   }
 }
