@@ -1,8 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:bamtol_market_app/src/app.dart';
+// firebase
+import 'package:bamtol_market_app/firebase_options.dart';
+import 'package:firebase_core/firebase_core.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(const MyApp());
 }
 
@@ -22,7 +29,7 @@ class MyApp extends StatelessWidget {
               color: Colors.white,
             ),
           ),
-          scaffoldBackgroundColor: const Color(0xff212123)),
+          scaffoldBackgroundColor: Color(0xff212123)),
       getPages: [GetPage(name: '/', page: () => const App())],
     );
   }
