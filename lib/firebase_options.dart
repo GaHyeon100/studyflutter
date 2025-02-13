@@ -65,4 +65,5 @@ class DefaultFirebaseOptions {
     storageBucket: 'bamtol-market-app-100.firebasestorage.app',
     iosBundleId: 'com.bbaek.cloneapp.bamtolMarketApp',
   );
+
 }
