@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:bamtol_market_app/main.dart';
+import 'package:bamtol_market_app/src/init/page/init_start_page.dart';
+import 'package:bamtol_market_app/src/splash/page/splash_page.dart';
 
 // StatelessWidget 상속받은 App 클래스
 // 생성자 App({}) 는 변하지 않는 값만 받으며, super.key는 flutter가 위젯을 식별하는 키를 부모 클래스인 statelessWidget에 넘겨준다는 의미
@@ -13,29 +15,16 @@ class App extends StatefulWidget {
 }
 
 class _AppState extends State<App> {
-  int count = 0;
+  late bool isInitStarted;
 
   @override
   void initState() {
     super.initState();
-    count = prefs.getInt('counter') ?? 0;
+    isInitStarted = prefs.getBool('isInitStarted') ?? true;
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Text(
-          count.toString(),
-          style: const TextStyle(fontSize: 80, color: Colors.white),
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(onPressed: () async {
-        setState(() {
-          count++;
-        });
-        await prefs.setInt('counter', count);
-      }),
-    );
+    return isInitStarted ? const InitStartPage() : const SplashPage();
   }
 }
