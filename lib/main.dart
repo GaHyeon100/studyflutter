@@ -1,3 +1,5 @@
+import 'package:bamtol_market_app/src/home/page/home_page.dart';
+import 'package:bamtol_market_app/src/user/login/page/login_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:bamtol_market_app/src/app.dart';
@@ -6,6 +8,10 @@ import 'package:bamtol_market_app/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
 //sharedpreferences
 import 'package:shared_preferences/shared_preferences.dart';
+// controller
+import 'package:bamtol_market_app/src/splash/controller/splash_controller.dart';
+import 'package:bamtol_market_app/src/common/data_load_controller.dart';
+import 'package:bamtol_market_app/src/common/controller/authentication_controller.dart';
 
 late SharedPreferences prefs;
 void main() async {
@@ -34,7 +40,16 @@ class MyApp extends StatelessWidget {
             ),
           ),
           scaffoldBackgroundColor: Color(0xff212123)),
-      getPages: [GetPage(name: '/', page: () => const App())],
+      initialBinding: BindingsBuilder(() {
+        Get.put(SplashController()); // SplashController를 앱 전반에서 사용가능함
+        Get.put(DataLoadController());
+        Get.put(AuthenticationController());
+      }),
+      getPages: [
+        GetPage(name: '/', page: () => const App()),
+        GetPage(name: '/home', page: () => const HomePage()),
+        GetPage(name: '/login', page: () => const LoginPage())
+      ],
     );
   }
 }

@@ -93,9 +93,9 @@
     },
     {
       "name": "file",
-      "rootUri": "file:///C:/Users/bbaek/AppData/Local/Pub/Cache/hosted/pub.dev/file-7.0.1",
+      "rootUri": "file:///C:/Users/bbaek/AppData/Local/Pub/Cache/hosted/pub.dev/file-6.1.4",
       "packageUri": "lib/",
-      "languageVersion": "3.0"
+      "languageVersion": "2.12"
     },
     {
       "name": "firebase_auth",
@@ -458,7 +458,7 @@
       "languageVersion": "3.5"
     }
   ],
-  "generated": "2025-02-13T12:10:07.854381Z",
+  "generated": "2025-02-18T12:27:29.681453Z",
   "generator": "pub",
   "generatorVersion": "3.5.3",
   "flutterRoot": "file:///C:/Users/bbaek/sdk/flutter",
