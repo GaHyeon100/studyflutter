@@ -12,7 +12,20 @@
           "package_name": "com.bbaek.cloneapp.bamtol_market_app"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "934973246255-m450o9ti4bn3mb8i15k0segv92dt5eib.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.bbaek.cloneapp.bamtol_market_app",
+            "certificate_hash": "cb2f9067e737362a82f1ffcb973590365de2f100"
+          }
+        },
+        {
+          "client_id": "934973246255-bun60mtu8i3rqi8ng5a9g40mjdkmu7h7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyARTBy6zsSZ-E8EG1-OLBAcQkTwq0mDDh4"
@@ -20,7 +33,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "934973246255-bun60mtu8i3rqi8ng5a9g40mjdkmu7h7.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "934973246255-2sfum144n3s9sg0kimvpu10f20ovmuqp.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.bbaek.cloneapp.bamtolMarketApp"
+              }
+            }
+          ]
         }
       }
     }
