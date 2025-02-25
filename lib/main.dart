@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:bamtol_market_app/src/app.dart';
 // firebase
 import 'package:bamtol_market_app/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -18,6 +17,7 @@ import 'package:bamtol_market_app/src/user/repository/authentication_repository.
 import 'package:bamtol_market_app/src/user/login/controller/login_controller.dart';
 import 'package:bamtol_market_app/src/user/signup/controller/signup_controller.dart';
 import 'package:bamtol_market_app/src/user/repository/user_repository.dart';
+import 'package:bamtol_market_app/src/common/bottom_nav_controller.dart';
 //page
 import 'package:bamtol_market_app/src/home/page/home_page.dart';
 import 'package:bamtol_market_app/src/user/login/page/login_page.dart';
@@ -65,6 +65,7 @@ class MyApp extends StatelessWidget {
         Get.put(UserRepository(db));
 
         Get.put(user_repository);
+        Get.put(BottomNavController());
       }),
       getPages: [
         GetPage(name: '/', page: () => const Root()),
