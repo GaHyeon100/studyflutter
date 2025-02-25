@@ -1,7 +1,3 @@
-//page
-import 'package:bamtol_market_app/src/home/page/home_page.dart';
-import 'package:bamtol_market_app/src/user/login/page/login_page.dart';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:bamtol_market_app/src/app.dart';
@@ -10,6 +6,8 @@ import 'package:bamtol_market_app/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
 //firebase auth
 import 'package:firebase_auth/firebase_auth.dart';
+//firestore
+import 'package:cloud_firestore/cloud_firestore.dart';
 //sharedpreferences
 import 'package:shared_preferences/shared_preferences.dart';
 // controller
@@ -18,6 +16,13 @@ import 'package:bamtol_market_app/src/common/data_load_controller.dart';
 import 'package:bamtol_market_app/src/common/controller/authentication_controller.dart';
 import 'package:bamtol_market_app/src/user/repository/authentication_repository.dart';
 import 'package:bamtol_market_app/src/user/login/controller/login_controller.dart';
+import 'package:bamtol_market_app/src/user/signup/controller/signup_controller.dart';
+import 'package:bamtol_market_app/src/user/repository/user_repository.dart';
+//page
+import 'package:bamtol_market_app/src/home/page/home_page.dart';
+import 'package:bamtol_market_app/src/user/login/page/login_page.dart';
+import 'package:bamtol_market_app/src/user/signup/page/signup_page.dart';
+import 'package:bamtol_market_app/src/root.dart';
 
 late SharedPreferences prefs;
 void main() async {
@@ -34,6 +39,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var db = FirebaseFirestore.instance;
     return GetMaterialApp(
       title: '당근마켓 클론 코딩',
       initialRoute: '/',
@@ -52,11 +58,16 @@ class MyApp extends StatelessWidget {
 
         var authenticationRepository =
             AuthenticationRepository(FirebaseAuth.instance);
+        var user_repository = UserRepository(db);
         Get.put(authenticationRepository);
-        Get.put(AuthenticationController(authenticationRepository));
+        Get.put(AuthenticationController(
+            authenticationRepository, user_repository));
+        Get.put(UserRepository(db));
+
+        Get.put(user_repository);
       }),
       getPages: [
-        GetPage(name: '/', page: () => const App()),
+        GetPage(name: '/', page: () => const Root()),
         GetPage(name: '/home', page: () => const HomePage()),
         GetPage(
             name: '/login',
@@ -64,7 +75,19 @@ class MyApp extends StatelessWidget {
             binding: BindingsBuilder(() {
               Get.lazyPut<LoginController>(
                   () => LoginController(Get.find<AuthenticationRepository>()));
-            }))
+            })),
+        GetPage(
+          name: '/signup/:uid',
+          page: () => const SignupPage(),
+          binding: BindingsBuilder(
+            () {
+              Get.create<SignupController>(
+                () => SignupController(Get.find<UserRepository>(),
+                    Get.parameters['uid'] as String),
+              );
+            },
+          ),
+        ),
       ],
     );
   }

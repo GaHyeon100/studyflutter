@@ -1,13 +1,15 @@
+import 'package:bamtol_market_app/src/user/repository/user_repository.dart';
 import 'package:get/get.dart';
 import 'package:bamtol_market_app/src/user/repository/authentication_repository.dart';
 import 'package:bamtol_market_app/src/user/model/user_model.dart';
 import 'package:bamtol_market_app/src/common/enum/authentication_status.dart';
 
 class AuthenticationController extends GetxController {
-  AuthenticationController(this._authenticationRepository);
+  AuthenticationController(
+      this._authenticationRepository, this._userRepository);
 
   final AuthenticationRepository _authenticationRepository;
-
+  final UserRepository _userRepository;
   Rx<UserModel> userModel = const UserModel().obs;
 
   Rx<AuthenticationStatus> status = AuthenticationStatus.init.obs;
@@ -24,6 +26,14 @@ class AuthenticationController extends GetxController {
       status(AuthenticationStatus.unknown);
     } else {
       // authentication or unAuthentication (user이 등록된 상태_로그인 된 상태)
+      var result = await _userRepository.findUserOne(user.uid!);
+      if (result == null) {
+        userModel(user);
+        status(AuthenticationStatus.unAuthentication); //SNS 로그인 완료
+      } else {
+        status(AuthenticationStatus.authentication); //회원가입 완료
+        userModel(result);
+      }
     }
   }
 

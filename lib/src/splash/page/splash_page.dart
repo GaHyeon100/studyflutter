@@ -26,6 +26,9 @@ class SplashPage extends GetView<SplashController> {
               Get.offNamed('/login');
               break;
             case AuthenticationStatus.unAuthentication:
+              var userModel =
+                  Get.find<AuthenticationController>().userModel.value;
+              Get.offNamed('/signup/${userModel.uid}');
               break;
             case AuthenticationStatus.init:
               break;

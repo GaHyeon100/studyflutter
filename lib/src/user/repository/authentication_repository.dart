@@ -23,9 +23,7 @@ class AuthenticationRepository extends GetxService {
       return user == null
           ? null
           : UserModel(
-              name: user.displayName,
               uid: user.uid,
-              email: user.email,
             );
     });
   }
