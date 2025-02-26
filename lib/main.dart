@@ -23,6 +23,7 @@ import 'package:bamtol_market_app/src/home/page/home_page.dart';
 import 'package:bamtol_market_app/src/user/login/page/login_page.dart';
 import 'package:bamtol_market_app/src/user/signup/page/signup_page.dart';
 import 'package:bamtol_market_app/src/root.dart';
+import 'package:bamtol_market_app/src/product/write/page/product_write_page.dart';
 
 late SharedPreferences prefs;
 void main() async {
@@ -89,6 +90,7 @@ class MyApp extends StatelessWidget {
             },
           ),
         ),
+        GetPage(name: '/product/write', page: () => ProductWritePage()),
       ],
     );
   }
